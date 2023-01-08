@@ -3,6 +3,7 @@ package com.beges.bomjGame.webapp.config;
 import com.beges.bomjGame.service.abstracts.model.ServiceMessage;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -10,12 +11,10 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UpdateController {
 
-    @Autowired
-    private ServiceMessage serviceMessage;
+    private final ServiceMessage serviceMessage;
     private InitBot initBot;
 
 

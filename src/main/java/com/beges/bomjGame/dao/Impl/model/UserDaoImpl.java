@@ -2,6 +2,8 @@ package com.beges.bomjGame.dao.Impl.model;
 
 import com.beges.bomjGame.dao.abstracts.model.UserDao;
 import com.beges.bomjGame.model.User;
+import lombok.NoArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import java.util.Optional;
 
 @Repository
+@NoArgsConstructor
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
@@ -17,8 +20,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean checkUserById(Long id) {
-        Optional<User> user = Optional.of(entityManager.find(User.class, id));
-        return user.isPresent();
+        //Optional<User> user = Optional.of(getUserById(id));
+        return getUserById(id) != null;
     }
 
     @Transactional

@@ -8,6 +8,7 @@ import com.beges.bomjGame.service.abstracts.model.UserService;
 import lombok.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -23,7 +24,6 @@ public class ServiceMessageImpl implements ServiceMessage {
     private final ServiceButtons serviceButtons;
     private final UserService userService;
     private final ServiceBattleGrounds serviceBattleGrounds;
-
     private Long userId;
 
     @Override
@@ -41,9 +41,9 @@ public class ServiceMessageImpl implements ServiceMessage {
     public void takeMessage(Update update, SendMessage message) {
         message.enableMarkdown(true);
         message.setChatId(update.getMessage().getChatId());
-        Long id = update.getMessage().getChat().getId();
-        userId = id;
-        if (checkUserRegister(id)) {
+        userId = update.getMessage().getChat().getId();
+
+        if (checkUserRegister(userId)) {
             serviceButtons.mainMenu(message);
         } else {
             registerUser(update.getMessage().getChat().getId(),
