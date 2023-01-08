@@ -2,27 +2,34 @@ package com.beges.bomjGame.dao.Impl.model;
 
 import com.beges.bomjGame.dao.abstracts.model.UserDao;
 import com.beges.bomjGame.model.User;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.Optional;
 
 @Repository
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
-    private EntityManager em;
+    private EntityManager entityManager;
 
     @Override
     public boolean checkUserById(Long id) {
-        Optional<User> us = Optional.of(em.find(User.class, id));
-        return us.isPresent();
+        Optional<User> user = Optional.of(entityManager.find(User.class, id));
+        return user.isPresent();
+    }
+
+    @Transactional
+    @Override
+    public void save(User user) {
+        entityManager.persist(user);
     }
 
     @Override
-    public void save(User user) {
-        em.persist(user);
+    public User getUserById(Long id) {
+        return entityManager.find(User.class, id);
     }
 
 

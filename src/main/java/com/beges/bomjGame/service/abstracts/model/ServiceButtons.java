@@ -23,4 +23,6 @@ public interface ServiceButtons {
     void fromStreet(SendMessage sendMessage);
 
     void statistic(SendMessage sendMessage);
+
+    void afterFightMenu(SendMessage sendMessage, boolean isWin);
 }
