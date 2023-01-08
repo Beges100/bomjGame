@@ -1,10 +1,8 @@
 package com.beges.bomjGame.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.*;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="user_table")
@@ -14,7 +12,9 @@ import lombok.*;
 @Getter
 @Setter
 public class User {
+
     @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long chat_id;
 
     @Column(name = "nick_name")
@@ -25,4 +25,6 @@ public class User {
     private Boolean premium;
     //Усталость
     private Long fatigue;
+
+    private Integer level;
 }

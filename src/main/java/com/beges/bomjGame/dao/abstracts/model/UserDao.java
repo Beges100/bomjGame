@@ -6,4 +6,6 @@ public interface UserDao {
     boolean checkUserById(Long id);
 
     void save(User user);
+
+    User getUserById(Long id);
 }

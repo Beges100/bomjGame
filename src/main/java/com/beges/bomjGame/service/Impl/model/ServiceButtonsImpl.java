@@ -129,6 +129,29 @@ public class ServiceButtonsImpl implements ServiceButtons {
     }
 
     @Override
+    public void afterFightMenu(SendMessage sendMessage,boolean isWin) {
+        keyboard.clear();
+        if (isWin) {
+            KeyboardRow keyboardFirstRow = new KeyboardRow();
+            KeyboardRow keyboardSecond = new KeyboardRow();
+            // Добавляем кнопки в первую строчку клавиатуры
+            keyboardFirstRow.add(new KeyboardButton("Пойти копаться в мусорке"));
+            keyboardSecond.add(new KeyboardButton("На главную"));
+            keyboard.add(keyboardFirstRow);
+            keyboard.add(keyboardSecond);
+        } else {
+            KeyboardRow keyboardFirstRow = new KeyboardRow();
+            KeyboardRow keyboardSecond = new KeyboardRow();
+            // Добавляем кнопки в первую строчку клавиатуры
+            keyboardFirstRow.add(new KeyboardButton("Покушоть"));
+            keyboardSecond.add(new KeyboardButton("На главную"));
+            keyboard.add(keyboardFirstRow);
+            keyboard.add(keyboardSecond);
+        }
+
+    }
+
+    @Override
     public void backPackMenu(SendMessage sendMessage) {
 
     }
