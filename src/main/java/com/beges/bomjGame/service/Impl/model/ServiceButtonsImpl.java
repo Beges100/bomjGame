@@ -6,6 +6,7 @@ import com.beges.bomjGame.service.abstracts.model.ServiceButtons;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -16,10 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@NoArgsConstructor
 @AllArgsConstructor
 public class ServiceButtonsImpl implements ServiceButtons {
-    private ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+
+    @Autowired
+    private ReplyKeyboardMarkup replyKeyboardMarkup;
     private List<KeyboardRow> keyboard = new ArrayList<>();
 
     private UserDao userDao;

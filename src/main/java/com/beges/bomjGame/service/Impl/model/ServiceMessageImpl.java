@@ -1,5 +1,6 @@
 package com.beges.bomjGame.service.Impl.model;
 
+import com.beges.bomjGame.model.Enemy;
 import com.beges.bomjGame.model.User;
 import com.beges.bomjGame.service.abstracts.model.ServiceBattleGrounds;
 import com.beges.bomjGame.service.abstracts.model.ServiceButtons;
@@ -18,7 +19,7 @@ import java.util.List;
 
 
 @RequiredArgsConstructor
-@Service
+@Service()
 public class ServiceMessageImpl implements ServiceMessage {
 
     private final ServiceButtons serviceButtons;
@@ -84,8 +85,7 @@ public class ServiceMessageImpl implements ServiceMessage {
                 serviceButtons.fightMenu(message);
             }
             case "Напасть на крысу" -> {
-                message.setText(goToBattle());
-                //isWin
+                goToBattle(message);
                 serviceButtons.afterFightMenu(message, false);
         }
             case "На главную" -> {
@@ -102,31 +102,46 @@ public class ServiceMessageImpl implements ServiceMessage {
                         """);
                 serviceButtons.statistic(message);
             }
-            default -> message.setText("Нет такой комманды");
+            default -> message.setText("Нет такой команды");
         }
     }
 
 
     //TODO Вынести в контроллер
-    public String goToBattle() {
-        String enemy = serviceBattleGrounds.getEnemy("Влад");
-        //user.getAttackPower
-        serviceBattleGrounds.attack(10);
-        //user.getAgility
-        String level = "10";
-        serviceBattleGrounds.parry(10);
+    @SneakyThrows
+    public void goToBattle(SendMessage sendMessage) {
+        Enemy enemy = serviceBattleGrounds.getEnemy();
         boolean isWin = serviceBattleGrounds.isWin(userId);
-        String win = "Выйграли";
-        String lose = "Проиграли";
         //Коллекция айтемов
         List<String> inventoryItems = new ArrayList<>();
         inventoryItems.add("Бутылка");
-        return String.format("Враг: %s, c уровнем " +
-                        "%s попался вам и вы %s"  +
-                " вы потеряли %s",
-                enemy, level,
-                isWin ? win : lose,
-                inventoryItems.stream().findFirst().get());
-
+        String random = "random";
+        String result = String.format("Вы начинаете бой с %s" +
+                " вы %s %s %s и %s, он в ответ %s , вы %s", enemy.getName(),
+                actions().stream().findFirst().get(), place().stream().findFirst().get(),
+                item().stream().findFirst().get() , random,
+                random, isWin ? "Выйграли" : "Проиграли");
+        sendMessage.setText(result);
     }
+
+    public List<String> actions() {
+        List<String> action = new ArrayList<>();
+        action.add("берете");
+        action.add("находите");
+        return action;
+    }
+    public List<String> place() {
+        List<String> place = new ArrayList<>();
+        place.add("из помойки");
+        place.add("в кармане");
+        return place;
+    }
+
+    public List<String> item() {
+        List<String> items = new ArrayList<>();
+        items.add("огрызок яблока");
+        return items;
+    }
+
+
 }

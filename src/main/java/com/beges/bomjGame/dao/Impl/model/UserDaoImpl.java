@@ -30,6 +30,7 @@ public class UserDaoImpl implements UserDao {
         entityManager.persist(user);
     }
 
+    //TODO сделать проверку на optional
     @Override
     public User getUserById(Long id) {
         return entityManager.find(User.class, id);
