@@ -1,12 +1,23 @@
 package com.beges.bomjGame.service.abstracts.model;
 
 
+import com.beges.bomjGame.model.Enemy;
+import com.beges.bomjGame.model.User;
+
 public interface ServiceBattleGrounds {
 
-    String getEnemy(String name);
-    void attack(int attackPower);
-    void parry(int agility);
+
+    Enemy getEnemy();
+
+    int attack(User user);
+
+    int parry(User user);
+
     boolean isWin(Long userId);
-    void escape();
+
+     User getUserById(Long userId);
+
+    String escape(User user);
+
     String endingMessage();
 }

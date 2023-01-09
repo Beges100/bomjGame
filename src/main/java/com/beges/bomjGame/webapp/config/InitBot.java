@@ -4,7 +4,9 @@ package com.beges.bomjGame.webapp.config;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -18,16 +20,15 @@ import javax.annotation.PostConstruct;
 
 
 @Component
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class InitBot extends TelegramLongPollingBot {
 
     @Value("${bot.name}")
     private String botName;
     @Value("${bot.token}")
     private String botToken;
-    @Autowired
-    private  UpdateController updateController;
+
+    private final UpdateController updateController;
 
     @Override
     public String getBotUsername() {
