@@ -10,6 +10,7 @@ import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -45,7 +46,6 @@ public class InitBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         updateController.processUpdate(update);
     }
-
 
     @PostConstruct
     public void init() throws TelegramApiException {

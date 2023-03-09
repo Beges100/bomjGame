@@ -25,6 +25,7 @@ public class ServiceButtonsImpl implements ServiceButtons {
     private List<KeyboardRow> keyboard = new ArrayList<>();
 
     private UserDao userDao;
+
     @Override
     public void mainMenu(SendMessage sendMessage) {
             // Создаем клавиуатуру
@@ -70,7 +71,6 @@ public class ServiceButtonsImpl implements ServiceButtons {
         // Добавляем кнопки во вторую строчку клавиатуры
         keyboardSecondRow.add(new KeyboardButton("На главную"));
 
-
         // Добавляем все строчки клавиатуры в список
         keyboard.add(keyboardFirstRow);
         keyboard.add(keyboardSecondRow);
@@ -82,8 +82,6 @@ public class ServiceButtonsImpl implements ServiceButtons {
 
     @Override
     public void fromStreet(SendMessage sendMessage) {
-
-
         keyboard.clear();
         // Первая строчка клавиатуры
         KeyboardRow keyboardFirstRow = new KeyboardRow();

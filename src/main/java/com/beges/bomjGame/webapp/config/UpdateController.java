@@ -16,7 +16,6 @@ public class UpdateController {
     private final ServiceMessage serviceMessage;
     private InitBot initBot;
 
-
     public void registerBot(InitBot initBot) {
         this.initBot = initBot;
     }
@@ -36,6 +35,5 @@ public class UpdateController {
     public void setView(SendMessage sendMessage) {
         initBot.sendAnswerMessage(sendMessage);
     }
-
 
 }

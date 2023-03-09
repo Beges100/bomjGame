@@ -1,10 +1,13 @@
 package com.beges.bomjGame.service.abstracts.model;
 
 
+import com.beges.bomjGame.dao.Impl.model.EnemyDaoImpl;
+import com.beges.bomjGame.dao.abstracts.model.EnemyDao;
 import com.beges.bomjGame.dao.abstracts.model.UserDao;
 import com.beges.bomjGame.model.Enemy;
 import com.beges.bomjGame.model.Items;
 import com.beges.bomjGame.model.User;
+import com.beges.bomjGame.service.abstracts.repository.ReadOnlyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +22,7 @@ public class ServiceBattleGroundsImpl implements ServiceBattleGrounds {
     private List<Enemy> list = new ArrayList<>();
 
     private final UserDao userDao;
-    Enemy enemyDao;
+    private final EnemyDao enemyDao;
 
     @Override
     public User getUserById(Long userId) {
@@ -28,8 +31,9 @@ public class ServiceBattleGroundsImpl implements ServiceBattleGrounds {
     @Override
     public Enemy getEnemy() {
 //        enemyDao.getBytes();
-        list.add(new Enemy(1L, "Vlad", 10, 10, 10,10));
-        Enemy enemy = list.stream().findFirst().get();
+//        list.add(new Enemy(1L, "Vlad", 10, 10, 10,10));
+        Enemy enemy = enemyDao.getEnemyById(1L);
+//                list.stream().findFirst().get();
         return enemy;
     }
 
